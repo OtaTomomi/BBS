@@ -1,0 +1,210 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: #FFFFFF;
+	display: block;
+    margin: 30px;
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+}
+
+.tables {
+	margin-left:auto;
+ 	margin-right:auto;
+	table-layout:fixed;
+
+}
+div.subject{
+	width:900px;
+	font-size:large;
+	font-weight:bold;
+	 margin: 3px;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+}
+div.text{
+	margin-left:16px
+}
+
+.postInfo{
+	text-align:right;
+	text-align:bottom;
+	margin-right: 3px;
+    margin-bottom: 3px;
+    position:relative;
+	right:168px;
+	float:right;
+
+}
+.deleteButton{
+	text-align:right;
+	margin-right: 3px;
+    margin-bottom: 3px;
+     position:relative;
+	left:450px;
+	bottom:4px;
+}
+.commentInfo{
+	text-align:right;
+	text-align:bottom;
+	margin-right: 3px;
+    margin-bottom: 3px;
+    position:relative;
+	right:px;
+
+
+}
+div.commentDeleteButton{
+	text-align:right;
+	margin-right: 3px;
+    margin-bottom: 3px;
+     position:relative;
+	left:450px;
+	bottom:4px;
+}
+
+
+.header {
+
+}
+
+
+
+
+
+
+
+/*
+body {
+	background-color: #E3FFFF;
+}
+
+.main-contents {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 20px;
+	margin-right: 20px;
+	background-color: white;
+	height: 100%;
+	width: 800px;
+}
+
+.tweet-box {
+	width: 780px;
+	height: 56px;
+}
+
+.header {
+	text-align: right;
+}
+
+.profile {
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	height: 100px;
+}
+
+.profile .profile-image {
+	float: left;
+}
+
+.profile .name h2 {
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 36px;
+	margin: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+a.profile .account {
+	font-size: 13px;
+	line-height: 22px;
+}
+
+.profile .description {
+	font-size: 13px;
+	line-height: 22px;
+}
+
+.form-area {
+	margin-top: 00px;
+	margin-right: 00px;
+	margin-bottom: 00px;
+	margin-left: 00px;
+	background-color: #ECECFF;
+}
+
+.message-icon {
+	border-bottom-style: ridge;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	height: 80px;
+}
+
+.message-icon .icon {
+	margin-top: 1px;
+	margin-right: 1px;
+	margin-bottom: 1px;
+	margin-left: 1px;
+	float: left;
+}
+
+.message-icon .text {
+	height: 40px;
+}
+
+.message-icon .message {
+	margin-left: 60px;
+}
+
+.message-icon .account-name {
+	margin-top: 1px;
+	margin-bottom: 5px;
+}
+
+.message-icon .account-name .account {
+	font-weight: bold;
+}
+
+.account-name .name {
+	font-weight: lighter;
+	color: gray;
+	font: small-caption;
+}
+
+.message .date {
+	font-weight: lighter;
+	color: gray;
+	font: small-caption;
+}
+
+.copyright {
+	width: 250px;
+	margin: 0 auto;
+}
+
+label {
+	display: block;
+}
+
+.errorMessages {
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	color: red;
+}
+
+
+*/
