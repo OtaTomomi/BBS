@@ -22,7 +22,7 @@ public class PositionDao {
 		try{
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM positions");
-			sql.append(" ORDER BY id LIMIT " + num + ";");
+			sql.append(" ORDER BY id DESC LIMIT " + num + ";");
 
 			ps = connection.prepareStatement(sql.toString());
 

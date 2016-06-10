@@ -30,15 +30,18 @@ public class EditUserServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException{
 
-		if(request.getParameter("userId") != null){
+		if(request.getParameter("userId") != null && !request.getParameter("userId").equals("")){
 
 			int editId = Integer.parseInt(request.getParameter("userId"));
 
 			User editUser = new UserService().getUserInfomation(editId);
+			User superEditUser = new UserService().getUserInfomation(editId);
+
 
 			if(editUser != null){
 
 				request.setAttribute("editUser", editUser);
+				request.setAttribute("superEditUser", superEditUser);
 
 				List<Branch> branches = new BranchService().getBranch();
 				request.setAttribute("branches", branches);
@@ -65,6 +68,7 @@ public class EditUserServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException{
+		User superEditUser = new UserService().getUserInfomation(Integer.parseInt(request.getParameter("id")));
 
 		List<String> messages =  new ArrayList<String>();
 
@@ -93,12 +97,14 @@ public class EditUserServlet extends HttpServlet{
 			request.setAttribute("branches", branches);
 			request.setAttribute("positions", positions);
 			request.setAttribute("editUser", editUser);
+			request.setAttribute("superEditUser", superEditUser);
 			request.getRequestDispatcher("editusercheck.jsp").forward(request, response);
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("branches", branches);
 			request.setAttribute("positions", positions);
 			request.setAttribute("editUser", editUser);
+			request.setAttribute("superEditUser", superEditUser);
 			request.getRequestDispatcher("edituser.jsp").forward(request, response);
 		}
 
@@ -127,24 +133,29 @@ public class EditUserServlet extends HttpServlet{
 		String password = request.getParameter("password");
 		String passwordCheck = request.getParameter("passwordCheck");
 		String name = request.getParameter("name");
+		int id = Integer.parseInt(request.getParameter("id"));
 		int branchId = Integer.parseInt(request.getParameter("branchId"));
 		int positionId = Integer.parseInt(request.getParameter("positionId"));
-		//User user = new UserService().getCheckLoginId(loginId);
+		User user = new UserService().getCheckLoginId(loginId);
+		User user2 = new UserService().getUserInfomation(id);
+		System.out.println(user2.getLoginId());
+		System.out.println(loginId );
 
 
-		//if(user != null){
-			//messages.add("ログインIDがすでに使用されています");
 
-		//}
-		if (StringUtils.isEmpty(loginId) == true){
+		if(user != null && !loginId.equals(user2.getLoginId())){
+			messages.add("ログインIDがすでに使用されています");
+
+		}
+		if (StringUtils.isBlank(loginId) == true){
 			messages.add("ログインIDを入力してください");
 
 		}
-		if (loginId.length() < 6 || 20 < loginId.length()){
+		if (!StringUtils.isBlank(loginId)&&loginId.length() < 6 || 20 < loginId.length()){
 			messages.add("ログインIDは6文字以上20文字以下で入力してください");
 
 		}
-		if (!loginId.matches("^[a-zA-Z0-9]+$")){
+		if (!StringUtils.isBlank(loginId)&&!loginId.matches("^[a-zA-Z0-9]+$")){
 			messages.add("ログインIDは半角英数字で入力してください");
 
 		}
@@ -165,14 +176,14 @@ public class EditUserServlet extends HttpServlet{
 		if (name.length() > 10){
 			messages.add("名称は10文字以下で入力してください");
 		}
-		if (StringUtils.isEmpty(name) == true){
+		if (StringUtils.isBlank(name) == true){
 			messages.add("名称を入力してください");
 		}
-		if (branchId == 0){
+		if (branchId == 8){
 			messages.add("支店名を選択してください");
 
 		}
-		if (positionId == 0){
+		if (positionId == 5){
 			messages.add("部署・役職名を選択してください");
 
 		}

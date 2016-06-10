@@ -12,6 +12,17 @@
 </head>
 <body>
 
+
+
+<div class = "header" >
+<a href = "posting">新規投稿画面</a>
+<c:if test = "${ loginUser.branchId == 7 && loginUser.positionId == 1 }">
+	<a href = "usercontroll">ユーザー管理画面</a>
+</c:if>
+
+<a href = "logout">ログアウト</a>
+</div>
+<h3>ホーム</h3>
 <c:if test = "${ not empty errorMessages }">
 	<div class = "errorMessages">
 		<ul>
@@ -23,30 +34,26 @@
 	<c:remove var = "errorMessages" scope = "session" />
 </c:if>
 
-<div class = "header" >
-メニュー
-<a href = "posting">新規投稿画面</a>
-<c:if test = "${ loginUser.branchId == 7 && loginUser.positionId == 1 }">
-	<a href = "usercontroll">ユーザー管理画面</a>
-</c:if>
-<c:if test = "${ loginUser.branchId != 7 || loginUser.positionId != 1 }">
-<FONT color = "#bababa">ユーザー管理画面</FONT>
-</c:if>
-<a href = "logout">ログアウト</a>
-</div>
-
 <br />
 <div class = "search">
+
 <form action = "home" method = "get">
-
-	カテゴリを指定して検索<br />
-	<textarea name = "category" cols = "20" rows = "1" class = "categrysearch-box"><c:out value = "${category }" /></textarea><br />
-	日にちを指定して検索<br />
-
-
-
-	<select name = "beginYear" >
-		<c:forEach items = "${ years }"  var = "year">
+<table border = "0">
+<tr>
+<td class = "row-search">
+	カテゴリを指定して検索
+</td>
+<td class = "row-right">
+	：&nbsp;<input type = "text" name = "category" size = "20" class = "categrysearch-box" value = "${category }">
+</td>
+</tr>
+<tr>
+<td class = "row-search">
+	日にちを指定して検索
+</td>
+<td class = "row-right">
+	：&nbsp;<select name = "beginYear" >
+		<c:forEach begin = "${ beginDate.year }"  var = "year" end = "${endDate.year}">
 			<option value = "${ year }"
 				<c:if test = "${ year == beginDate.year }">
 				 selected
@@ -80,7 +87,7 @@
 
 	～
 	<select name = "endYear" >
-			<c:forEach items = "${ years }"  var = "year">
+			<c:forEach begin = "${ beginDate.year }"  var = "year" end = "${endDate.year}">
 				<option value = "${ year }"<c:if test = "${ year == endDate.year }">
 				 selected
 				</c:if>>
@@ -109,39 +116,56 @@
 			</c:forEach>
 	</select>日
 	<input type = "hidden" value = "1" name = "search">
-	<input type = "submit" value = "検索">
+	<input type = "submit" value = "検索"class = "button">
 
+	</td>
+
+	</tr>
+</table>
 </form>
-
-<form action = "home" method = "post">
+	<form action = "home" method = "post">
 		<input type = "hidden" value = "1" name = "reset">
-		<input type = "submit" value = "検索リセット">
-</form>
+		<input type = "submit" value = "検索リセット" class = "button">
+	</form>
+
+
+
+
+
+
+
+
+
 
 
 </div>
 
 <br />
+<c:forEach items = "${ userMessages }" var = "userMessage" >
 <div class = "tables">
-	<c:forEach items = "${ userMessages }" var = "userMessage" >
-	<table border = "1" align = "center">
-		<tr>
+	<table border = "1" align = "center" class = "table">
+		<tr class = "first-sell">
 
-			<td>
+			<td class = "subject">
 			<div class = "subject"><c:out value = "${ userMessage.subject }" /></div>
+			</td>
+		</tr>
+		<tr>
+			<td class = "contents">
 			<div class = "text">
-			<pre><c:out value = "${ userMessage.text }" /></pre></div>
+			<pre><font size = +1 ><c:out value = "${ userMessage.text }" /></font></pre></div>
 			<div class = "postInfo">
-				<span>カテゴリー：<c:out value = "${ userMessage.category }" /></span>
-				<span>投稿日時：<fmt:formatDate value = "${ userMessage.insertDate }"
+				<font size = -1>投稿者：</font><span class = "user"><c:out value = "${ userMessage.userName }" /></span>
+				<font size = -1>投稿日時：</font><span class = "insert"><fmt:formatDate value = "${ userMessage.insertDate }"
 				pattern = "yyyy/MM/dd HH:mm:ss"/></span>
-				<span>投稿者：<c:out value = "${ userMessage.userName }" /></span>
+				<font size = -1>カテゴリー：</font><span class = "category"><c:out value = "${ userMessage.category }" /></span>
+
 			</div>
 				<span class = "deleteButton">
 				<c:if test = "${ loginUser.branchId == 7 && loginUser.positionId == 2 }">
 					<form action = "home" method = "post">
 						<input type = "hidden" value ="${ userMessage.id }" name = "deleteMessageId">
-						<input type = "submit" value = "投稿削除"
+						<input type = "submit" value = "投稿削除"class = "button"
 						onClick = "return confirm('本当にこの投稿を削除してよろしいですか？')">
 					</form>
 				</c:if>
@@ -152,7 +176,7 @@
 								<c:if test = "${ loginUser.branchId == user.branchId && user.positionId ==4}">
 							 		<form action = "home" method = "post">
 										<input type = "hidden" value ="${ userMessage.id }" name = "deleteMessageId">
-										<input type = "submit" value = "投稿削除"
+										<input type = "submit" value = "投稿削除"class = "button"
 										onClick = "return confirm('本当にこの投稿を削除してよろしいですか？')">
 									</form>
 							 	</c:if>
@@ -162,7 +186,7 @@
 					<c:if test = "${ userMessage.userName == loginUser.name }">
 						<form action = "home" method = "post">
 							<input type = "hidden" value ="${ userMessage.id }" name = "deleteMessageId">
-							<input type = "submit" value = "投稿削除"
+							<input type = "submit" value = "投稿削除"class = "button"
 							onClick = "return confirm('本当にこの投稿を削除してよろしいですか？')">
 						</form>
 					 </c:if>
@@ -174,26 +198,29 @@
 
 		<c:forEach items = "${ userComments }" var = "userComment" >
 			<c:if test = "${ userMessage.id == userComment.messageId }" >
-			<tr>
-				<td>
+			<tr class = "comment">
+				<td class = "comment">
 					<div class = comment>
 						<div class = commentText>
-							<pre><c:out value = "${ userComment.commentText }" /></pre><br />
+							<pre class = "cmmentText"><c:out value = "${ userComment.commentText }" /></pre><br />
 						</div>
 						<div class = "commentInfo">
+						<%--<font size = -1> --%>
 						<span class = commentName>
 							<c:out value = "${ userComment.commentName }" />
 						</span>
+						&nbsp;
 						<span class = commentInsertDate>
 							<fmt:formatDate value = "${ userComment.commentInsertDate }"
 							pattern = "yyyy/MM/dd HH:mm:ss"/>
 						</span>
+						<%--</font> --%>
 						</div>
 						<div class = "commentDeleteButton">
 							<c:if test = "${ loginUser.branchId == 7 && loginUser.positionId == 2 }">
 								<form action = "home" method = "post">
 									<input type = "hidden" value ="${ userComment.commentId }" name = "deleteCommentId">
-									<input type = "submit" value = "コメント削除"
+									<input type = "submit" value = "コメント削除"class = "button"
 									onClick = "return confirm('本当にこのコメントを削除してよろしいですか？')">
 								</form>
 							</c:if>
@@ -203,9 +230,9 @@
 										<c:if test = "${ userComment.commentName == user.name }">
 											<c:if test = "${ loginUser.branchId == user.branchId
 											 && user.positionId ==4}">
-							 					<form action = "home" method = "post"><br />
+							 					<form action = "home" method = "post">
 													<input type = "hidden" value ="${ userComment.commentId }" name = "deleteCommentId">
-													<input type = "submit" value = "コメント削除"
+													<input type = "submit" value = "コメント削除"class = "button"
 													onClick = "return confirm('本当にこのコメントを削除してよろしいですか？')">
 												</form>
 							 				</c:if>
@@ -213,38 +240,47 @@
 									</c:forEach>
 								</c:if>
 								<c:if test = "${ userComment.commentName == loginUser.name }">
-									<form action = "home" method = "post"><br />
+									<form action = "home" method = "post">
 										<input type = "hidden" value ="${ userComment.commentId }" name = "deleteCommentId">
-										<input type = "submit" value = "コメント削除"
+										<input type = "submit" value = "コメント削除"class = "button"
 										onClick = "return confirm('本当にこのコメントを削除してよろしいですか？')">
 									</form>
 								 </c:if>
 							</c:if>
 						</div>
 					</div>
+					</td>
+				</tr>
 			</c:if>
 		</c:forEach>
 		<tr>
-			<td>
+			<td class = "comment-post">
 
-			<form action = "home" method = "post"><br />
-				<div class = "comment-area">
-					コメント投稿:<br />
-					<textarea name = "commentText" cols = "70" rows = "5" wrap = "hard" class = "comment-box"></textarea>
+			<form action = "home" method = "post">
+			<div class = "comment-area">
+
+			<span class = "postCommentTitle">
+			コメント投稿&nbsp;：&nbsp;
+			 </span>
+					<textarea name = "commentText" cols = "100" rows = "5" class = "comment-box" wrap = "hard"placeholder="500字以下で入力してください"></textarea>
 					<input type = "hidden" value ="${ userMessage.id }" name = messageId>
-					<input type = "submit" value = "コメント投稿">
 				</div>
+				<div class = "postCommentButton"><input type = "submit" value = "コメント投稿"class = "button"></div>
+
 			</form>
 			</td>
 				</tr>
 
 
-</table>
 
+	</table>
 	<br />
+	</div>
+</c:forEach>
+<br/>
 
-	</c:forEach>
-</div>
+
+
 <c:if test = "${ userMessages.size() == 0 }">
 検索に一致する投稿はありません
 </c:if>

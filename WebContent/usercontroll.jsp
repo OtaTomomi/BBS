@@ -25,42 +25,60 @@
 	<c:remove var = "errorMessages" scope = "session" />
 </c:if>
 </div>
-	<table border = "1">
+
+<div class = "header" >
+<a href = "signup">新規登録画面</a>
+	<a href = "home">ホーム画面</a>
+	<a href = "logout">ログアウト</a><br />
+</div>
+
+
+<br />
+<h2>ユーザー管理</h2>
+
+	<table class = "user-table" cellspacing="1" cellpadding="6" border="0">
 		<tr>
-			<th>ログインID</th><th>名称</th><th>利用制限</th><th>支店名</th><th>部署・役職</th><th>削除実行</th>
+			<th class = "id">ID</th><th class = "name">名称</th><th class = "option">支店名</th>
+			<th class = "option">部署・役職</th><th class = "button">利用制限</th><th class = "button">削除実行</th>
 		</tr>
 		<c:forEach items = "${ users }" var = "user" >
-				<tr>
-					<td><c:out value = "${ user.loginId }"  /></td>
-					<td>
+				<tr class = "row">
+					<td class = "row"><c:out value = "${ user.loginId }"  /></td>
+					<td class = "row">
 					<form action = "edituser" method = "get">
 						<input type = "hidden" name = "userId" value = "${ user.id }">
-						<c:out value = "${ user.name }"  />
-						<input type = "submit" value = 編集画面へ>
+						<a href = "edituser?userId=${ user.id }">
+						<c:out value = "${ user.name }"  /></a>
+						<span class = "user-button">
+						<%--
+							<input type = "submit" value = 編集 class = "button">
+						 --%>
+						</span>
 					</form>
 					</td>
-					<td>
+					<td class = "row-option">
 					<c:forEach items = "${ branches }" var = "branch">
 						<c:if test = "${ branch.id == user.branchId }">
 							<c:out value = "${ branch.name }"/>
 						</c:if>
 					</c:forEach>
 					</td>
-					<td>
+					<td class = "row-option">
 					<c:forEach items = "${ positions }" var = "position">
 						<c:if test = "${ position.id == user.positionId }">
 							<c:out value = "${ position.name }"/>
 						</c:if>
 					</c:forEach>
 					</td>
-					<td>
+					<td class = "row-button">
 					<form action = "usercontroll" method = "post" >
 						<c:if test = "${ user.useable == true }"  >
 							<input type = "hidden" name = "useable" value = "false">
 							<input type = "hidden" name = "userId" value = "${ user.id }">
 							<input type = "submit" name = "useableButton" value = "停止"
 							onClick = "return confirm('本当に${ user.name }を停止してよろしいですか？')"
-							<c:if test = "${ loginUser.id == user.id }">disabled="disabled"</c:if>>
+							<c:if test = "${ loginUser.id == user.id }">disabled="disabled"</c:if>
+							<c:if test = "${ loginUser.id != user.id }">class = "button"</c:if>>
 						</c:if>
 					</form>
 					<form action = "usercontroll" method = "post">
@@ -69,16 +87,18 @@
 							<input type = "hidden" name = "userId" value = "${ user.id }">
 							<input type = "submit" name = "useableButton" value = "復活"
 							onClick = "return confirm('本当に${ user.name }を復活させてよろしいですか？')"
-							<c:if test = "${ loginUser.id == user.id }">disabled="disabled"</c:if>>
+							<c:if test = "${ loginUser.id == user.id }">disabled="disabled"</c:if>
+							<c:if test = "${ loginUser.id != user.id }">class = "button"</c:if>>
 						</c:if>
 					</form>
 					</td>
-					<td>
+					<td class = "row-button">
 						<form action = "usercontroll" method = "post">
 						<input type = "hidden" name = "delete" value = "1">
 						<input type = "hidden" name = "userId" value = "${ user.id }">
 						<input type = "submit" name = "delete" value = "削除" onClick = "return confirm('本当に${ user.name }を削除してよろしいですか？')"
-						<c:if test = "${ loginUser.id == user.id }">disabled="disabled"</c:if>>
+						<c:if test = "${ loginUser.id == user.id }">disabled="disabled"</c:if>
+						<c:if test = "${ loginUser.id != user.id }">class = "button"</c:if>>
 						</form>
 
 					</td>
@@ -92,8 +112,6 @@
 
 	<br />
 
-	<a href = "signup">新規登録画面</a><br />
-	<a href = "home">ホーム画面</a><br />
 
 
 

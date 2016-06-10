@@ -8,63 +8,250 @@ body {
     margin-right: 30px;
     margin-bottom: 30px;
     margin-left: 30px;
+
+}
+.errorMessages {
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	color: red;
+}
+.errorMessagesLogin {
+	text-align:center;
+	color: red;
+}
+input.button{
+	cursor:pointer;
+
+
+}
+input.button:hover {
+
+    /* 背景色を明るい青色に指定 */
+
+    background-color: #c0c0c0;
+
+
+    /* 文字色を白色に指定
+
+
+    color: #fff;
+
+    */
+
+
+
 }
 
-.tables {
+div.tables {
 	margin-left:auto;
  	margin-right:auto;
 	table-layout:fixed;
 
+
+	/*
+
+    border-bottom: solid 1px #666;
+
+    background: #f5f5f5;
+    */
+
 }
+span.user-button{
+	float:right;
+	text-align:right;
+}
+table.table{
+	margin: 0 auto;
+    width: 650px;
+    border: none;
+
+    border-top: solid 1px #c0c0c0;
+    border-bottom: solid 1px #c0c0c0;
+    border-left: solid 1px #c0c0c0;
+    border-right: solid 1px #c0c0c0;
+
+    border-collapse: separate;
+    border-spacing: 0 0px;
+    background: #ffffff;
+
+    box-shadow: 0px 1px 10px #666;
+
+
+
+}
+td.contents{
+	border-top:solid 1px #878787;
+	border-bottom:solid 1px #878787;
+}
+td.subject{
+	border-bottom:none;
+}
+td.comment{
+	border-top:none;
+	border-bottom:1px dashed  #c0c0c0;
+
+}
+td.comment-post{
+	border-top:none;
+
+}
+.comment-area{
+	margin: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+span.user{
+	font-size:large;
+	font-weight:800;
+}
+span.insert{
+	font-size:large;
+	font-weight:800;
+}
+span.category{
+	font-size:large;
+	font-weight:800;
+}
+
+
 div.subject{
 	width:900px;
-	font-size:large;
+	font-size:x-large;
 	font-weight:bold;
 	 margin: 3px;
     margin-top: 3px;
     margin-right: 3px;
     margin-bottom: 3px;
     margin-left: 3px;
+    padding: 8px 15px;
 }
+
 div.text{
-	margin-left:16px
+	margin-left:16px;
+	padding: 8px 15px;
 }
 
 .postInfo{
-	text-align:right;
-	text-align:bottom;
 	margin-right: 3px;
-    margin-bottom: 3px;
+	margin-left: 32px;
+    /*
     position:relative;
-	right:168px;
-	float:right;
+	left:160px;
+	*/
+
+	float:left;
 
 }
+
 .deleteButton{
-	text-align:right;
-	margin-right: 3px;
-    margin-bottom: 3px;
-     position:relative;
-	left:450px;
-	bottom:4px;
+
+    text-align:right;
+
 }
 .commentInfo{
+	font-weight:bold;
 	text-align:right;
 	text-align:bottom;
 	margin-right: 3px;
     margin-bottom: 3px;
-    position:relative;
-	right:px;
+    position: relative;
+    left: 400px;
+
+	float:left;
+
+}
+.login{
+	text-align:center;
+}
+
+.commentText{
+	position: relative;
+    left: 300px;
+    margin-left:0px;
+}
+
+.commentDeleteButton{
+    text-align:right;
+	bottom:4px;
+}
+.comment-area{
+	margin-left:16px;
+	padding: 8px 15px;
+}
+.postCommentButton{
+	text-align:right;
+}
+td.comment-post{
+
+}
+
+
+.postCommentTitle{
+	vertical-align:top;
+}
+
+table.user-table{
+	border: 1px solid #006699;
+  	color: #000;
+  	table-layout:fixed;
+  	border-spacing: 1px;
 
 
 }
-div.commentDeleteButton{
+table.user-table tr td{
+	padding: 8px 15px;
+
+}
+th.id{
+	width:192px
+}
+th.name{
+	width:240px
+}
+th.option{
+
+	width:104px;
+}
+th{
+	background-color: #003366;
+  color: #edf6f9;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+}
+td.row{
+	background-color: #cad9ea;
+ 	color: #000;
+}
+td.row-option{
+	text-align:center;
+	background-color: #cad9ea;
+	text-align:center;
+}
+td.row-button{
+	text-align:center;
+	background-color: #cad9ea;
+ 	color: #000;
+}
+td.row-left{
 	text-align:right;
-	margin-right: 3px;
-    margin-bottom: 3px;
-     position:relative;
-	left:450px;
-	bottom:4px;
+}
+td.row-left-special{
+	text-align:right;
+	vertical-align:top;
+}
+td.submit-button{
+	text-align:center;
+}
+td.putting-button{
+	text-align:right;
+}
+td.row-search{
+	text-align:center;
 }
 
 

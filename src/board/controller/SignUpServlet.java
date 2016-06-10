@@ -83,15 +83,15 @@ public class SignUpServlet extends HttpServlet{
 
 		}
 
-		if (StringUtils.isEmpty(loginId) == true){
+		if (StringUtils.isBlank(loginId) == true){
 			messages.add("ログインIDを入力してください");
 
 		}
-		if (loginId.length() < 6 || 20 < loginId.length()){
+		if (!StringUtils.isBlank(loginId)&&loginId.length() < 6 || 20 < loginId.length()){
 			messages.add("ログインIDは6文字以上20文字以下で入力してください");
 
 		}
-		if (!loginId.matches("^[a-zA-Z0-9]+$")){
+		if (!StringUtils.isBlank(loginId)&&!loginId.matches("^[a-zA-Z0-9]+$")){
 			messages.add("ログインIDは半角英数字で入力してください");
 
 		}
@@ -99,7 +99,7 @@ public class SignUpServlet extends HttpServlet{
 			messages.add("パスワードを入力してください");
 
 		}
-		if (password.length() < 6 || 255 < loginId.length()){
+		if (StringUtils.isEmpty(password) == false && password.length() < 6 || 255 < loginId.length()){
 			messages.add("パスワードは6文字以上255文字以下で入力してください");
 
 		}
@@ -108,21 +108,21 @@ public class SignUpServlet extends HttpServlet{
 
 		}
 		//下のif文いらなさそう
-		if (!loginId.matches("^[a-zA-Z0-9 -/:-@--]+$")){
+		if (!StringUtils.isEmpty(password)&&!password.matches("^[a-zA-Z0-9 -/:-@--]+$")){
 			messages.add("パスワードは半角文字で入力してください");
 
 		}
 		if (name.length() > 10){
 			messages.add("名称は10文字以下で入力してください");
 		}
-		if (StringUtils.isEmpty(name) == true){
+		if (StringUtils.isBlank(name) == true){
 			messages.add("名称を入力してください");
 		}
-		if (branchId == 0){
+		if (branchId == 8){
 			messages.add("支店名を選択してください");
 
 		}
-		if (positionId == 0){
+		if (positionId == 5){
 			messages.add("部署・役職名を選択してください");
 
 		}

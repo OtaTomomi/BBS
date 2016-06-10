@@ -10,31 +10,34 @@
 <title>ログイン</title>
 </head>
 <body>
-<div class = "main-contents">
 
+
+
+
+<form action = "login" method = "post"><br />
+<h2 class = "login">ログイン</h2>
 <c:if test = "${ not empty errorMessages }">
-	<div class = "errorMessages">
-		<ul>
-			<c:forEach items = "${ errorMessages }" var = "message">
-				<li><c:out value = "${message}" /></li>
-			</c:forEach>
-		</ul>
+	<div class = "errorMessagesLogin">
+			<c:forEach items = "${ errorMessages }" var = "message"><c:out value = "${message}" /><br /></c:forEach>
 	</div>
 	<c:remove var = "errorMessages" scope = "session" />
+	<br />
 </c:if>
-<form action = "login" method = "post"><br />
-	<label for = "loginId">ログインID</label>
-	<input name = "loginId" value = "${ loginId }" id = "loginId" /><br />
 
-	<label for = "password">パスワード</label>
-	<input name = "password" type = "password" id = "password" /><br />
+
+
+<div class = "login">
+	<label for = "loginId"></label>
+	<input name = "loginId" value = "${ loginId }" id = "loginId"placeholder="ID(半角英数字)" size = "25"/><br />
+
+	<br /><label for = "password"></label>
+	<input name = "password" type = "password" id = "password" placeholder="パスワード(半角英数字記号)" size = "25"/><br />
 	<c:remove var = "loginId" scope = "session" />
 
-	<input type = "submit" value = "ログイン" /><br />
-<%--
-	<a href = "./">戻る</a>
- --%>
+	<br /><input type = "submit" value = "ログイン"style="width:192px;height:30px" class = "button" /><br />
+
+ </div>
 </form>
-</div>
+
 </body>
 </html>

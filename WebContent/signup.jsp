@@ -10,7 +10,16 @@
 <title>ユーザー新規登録</title>
 </head>
 <body>
-<div class = "main-contents">
+
+<div class = "header" >
+<a href = "usercontroll">ユーザー管理画面</a>
+<a href = "logout">ログアウト</a>
+</div>
+
+<h2>新規ユーザー登録</h2>
+
+
+
 <c:if test = "${ not empty errorMessages }" >
 	<div class = "errorMessages">
 		<ul>
@@ -21,23 +30,54 @@
 	</div>
 	<c:remove var = "errorMessages" scope = "session" />
 </c:if>
-</div>
-<form action = "signup" method = "post"><br />
 
-	<label for = "loginId">ログインID</label>
-	<input name = "loginId" value = "${ newUser.loginId }" id = "loginId" /><br />
 
-	<label for = "password">パスワード</label>
-	<input name = "password" type = "password" id = "password" /><br />
 
-	<label for = "passwordCheck">パスワード(確認用)</label>
-	<input name = "passwordCheck" type = "password" id = "passwordCheck" /><br />
 
-	<label for = "name">名称</label>
-	<input name = "name" value = "${ newUser.name }" id = "name" /><br />
+<div class = "signup">
+<form action = "signup" method = "post">
+<table border = "0" class = "sinup-table">
 
-	支店名
-
+<tr>
+	<td class = "row-left">
+	<label for = "loginId">ログインID：</label>
+	</td>
+	<td class = "row-right">
+		<input name = "loginId" value = "${ newUser.loginId }" id = "loginId"
+		 placeholder="半角英数字、6文字以上20文字以下"size = "34" /><br />
+	</td>
+</tr>
+<tr>
+	<td class = "row-left">
+	<label for = "name">名称：</label></td>
+	<td class = "row-right">
+	<input name = "name" value = "${ newUser.name }" id = "name"
+	placeholder="10文字以下" size = "34"/>
+	</td>
+</tr>
+<tr>
+	<td class = "row-left">
+	<label for = "password">パスワード：</label>
+	</td>
+	<td class = "row-right">
+	<input name = "password" type = "password" id = "password"
+	placeholder="半角英数字記号、6文字以上225文字以下"size = "34"/>
+	</td>
+</tr>
+<tr>
+	<td class = "row-left">
+	<label for = "passwordCheck">パスワード(確認用)：</label>
+	</td>
+	<td class = "row-right">
+	<input name = "passwordCheck" type = "password" id = "passwordCheck"
+	placeholder="パスワードと同じものを入力"size = "34"/>
+	</td>
+</tr>
+<tr>
+	<td class = "row-left">
+	支店名：
+	</td>
+	<td class = "row-right">
 	<select name = "branchId" >
 		<c:forEach items = "${ branches }" var = "branch" >
 			<option value = "${ branch.id }"
@@ -46,8 +86,13 @@
 			</option>
 		</c:forEach>
 	</select>
-
-	部署・役職名
+	</td>
+</tr>
+<tr>
+	<td class = "row-left">
+	部署・役職名：
+	</td>
+	<td class = "row-right">
 	<select name = "positionId" >
 		<c:forEach items = "${ positions }" var = "position" >
 			<option value = "${ position.id }"
@@ -57,10 +102,22 @@
 			</option>
 		</c:forEach>
 	</select>
-	<input type = "submit" value = "登録" /><br />
+	</td>
+</tr>
+<tr>
+<td class = "submit-button" colspan="2">
+<br />
+<input type = "submit" value = "登録"
+class = "button"style="width:224px;height:30px"/>
+</td>
+</tr>
+</table>
+
+
 	<c:remove var = "newUser" scope = "session" />
-	<a href = "usercontroll">戻る</a>
+
 </form>
+</div>
 
 </body>
 </html>

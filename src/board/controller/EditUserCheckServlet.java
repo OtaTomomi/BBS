@@ -29,6 +29,11 @@ public class EditUserCheckServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException{
+		HttpSession session = request.getSession();
+		List<String> messages =  new ArrayList<String>();
+		messages.add("指定されたURLには移動できませんでした");
+		session.setAttribute("errorMessages", messages);
+		response.sendRedirect("usercontroll");
 
 	}
 	@Override
@@ -40,6 +45,7 @@ public class EditUserCheckServlet extends HttpServlet{
 		String revision = request.getParameter("revision");
 
 		String password = request.getParameter("password");
+		User superEditUser = new UserService().getUserInfomation(Integer.parseInt(request.getParameter("id")));
 
 		User editUser = new User();
 		editUser.setId(Integer.parseInt(request.getParameter("id")));
@@ -59,7 +65,7 @@ public class EditUserCheckServlet extends HttpServlet{
 		List<Branch> branches = new BranchService().getBranch();
 		List<Position> positions = new PositionService().getPosition();
 		if(revision.equals("1")){
-
+			request.setAttribute("superEditUser", superEditUser);
 			request.setAttribute("editUser",editUser);
 			request.setAttribute("branches", branches);
 			request.setAttribute("positions", positions);

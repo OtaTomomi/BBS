@@ -22,35 +22,82 @@
 	</div>
 	<c:remove var = "errorMessages" scope = "session" />
 </c:if>
-<form action = "editusercheck" method = "post">
-		<FONT color = "	#ff0000">まだ登録は完了していません。</FONT><br />
-		以下の情報で登録します。よろしいですか？<br />
-		ログインID：<c:out value ="${ editUser.loginId }"/><br />
+<div class = "header" >
+<a href = "usercontroll">ユーザー管理画面</a>
+<a href = "logout">ログアウト</a>
+</div>
+
+<h3>編集内容確認</h3>
+		<div class = "warning"><FONT color = "	#ff0000">まだ編集は完了していません。</FONT><br />
+		</div>
+		<br />
+		以下の情報で更新します。よろしいですか？<br />
+		<br />
+<table border = "0">
+
+
+	<tr>
+	<td class = "row-left">
+		ログインID：
+	</td>
+	<td class = "row-right">
+	<c:out value ="${ editUser.loginId }"/>
+	</td>
+	</tr>
+	<tr>
+
+
 		<c:if test = "${ empty editUser.password }">
-		パスワード：変更なし<br />
+		<td class = "row-left">パスワード：</td>
+		<td class = "row-right">変更なし</td>
 		</c:if>
 		<c:if test = "${ !empty editUser.password }">
-		パスワード：変更あり<br />
-		<%--
-		<c:out value = "${ editUser.password }" /><br />
-		--%>
+		<td class = "row-left">パスワード：</td>
+		<td class = "row-right">変更あり</td>
 		</c:if>
-		名称：<c:out value = "${ editUser.name }" /><br />
+	</tr>
+	<tr>
+		<td class = "row-left">
+		名称：
+		</td>
+		<td class = "row-right">
+		<c:out value = "${ editUser.name }" />
+		</td>
+	</tr>
+	<tr>
+		<td class = "row-left">
 		支店名：
+		</td>
+		<td class = "row-right">
 		<c:forEach items = "${ branches }" var = "branch" >
 			<c:if test = "${branch.id == editUser.branchId}">
 				<c:out value = "${ branch.name }" /><br />
 			</c:if>
 		</c:forEach>
+		</td>
+	</tr>
+	<tr>
+		<td class = "row-left">
 		部署・役職名：
+		</td>
+		<td class = "row-right">
 		<c:forEach items = "${positions }" var = "position" >
 			<c:if test = "${position.id == editUser.positionId}">
 				<c:out value = "${ position.name }" /><br />
 			</c:if>
 		</c:forEach>
-		<br />
+		</td>
+	</tr>
 
-		<!------------------>
+
+
+
+
+	<tr>
+	<td class = "submit-button" colspan="2">
+	<br />
+	<form action = "editusercheck" method = "post">
+	<!------------------>
 		<input type = "hidden" value = "${ editUser.id }" name = id />
 		<input type = "hidden" value = "${ editUser.loginId }" name = loginId />
 		<input type = "hidden" value = "${ editUser.password }" type = password name = password />
@@ -61,10 +108,15 @@
 
 
 
+	<input type = "submit" value = "この内容で更新"onClick = "alert('更新しました')"
+	class = "button"style="width:224px;height:30px"/><br />
+	</form>
+	</td>
 
-	<input type = "submit" value = "この内容で登録"onClick = "confirm('登録しました')"/><br />
-</form>
-<form action = "editusercheck" method = "post">
+	<tr>
+
+	<td  class = "submit-button" colspan="2">
+	<form action = "editusercheck" method = "post">
 
 		<input type = "hidden" value = "${ editUser.id }" name = id />
 		<input type = "hidden" value = "${ editUser.loginId }" name = loginId />
@@ -73,9 +125,12 @@
 		<input type = "hidden" value = "${ editUser.branchId }" name = branchId />
 		<input type = "hidden" value = "${ editUser.positionId }" name = positionId />
 		<input type = "hidden" value = "1" name = "revision" />
-	<input type  = "submit" value = "編集内容を変更" /><br />
-	<a href = "usercontroll">ユーザー管理画面へ戻る</a>
-</form>
+	<input type  = "submit" value = "戻る"
+	class = "button"style="width:224px;height:30px" /><br />
+	</form>
+	</td>
+	</tr>
+</table>
 
 </body>
 </html>

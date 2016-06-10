@@ -31,7 +31,10 @@ public class HomeServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException,
 	ServletException{
-
+		//最終セッション日時取得チャレンジ
+		//成功してない
+		//無理～～～
+		List<User> users = new UserService().getUser();
 		List<UserComment> userComments = new CommentService().getComment();
 		SplitDate minDate = new MessageService().getMessageMinDate();
 		SplitDate maxDate = new MessageService().getMessageMaxDate();
@@ -81,11 +84,12 @@ public class HomeServlet extends HttpServlet{
 				request.setAttribute("days", days);
 				request.setAttribute("beginDate",searchBeginDate);
 				request.setAttribute("endDate",searchEndDate);
+				request.setAttribute("users", users);
 				request.getRequestDispatcher("home.jsp").forward(request, response);
 
 			}else{
 				List<UserMessage> userMessageMatchDateAndCategories = new MessageService().getMessageMatchDateAndCategory(category,beginYear, beginMonth, beginDay, endYear, endMonth, endDay);
-
+				request.setAttribute("users", users);
 				request.setAttribute("userMessages", userMessageMatchDateAndCategories);
 				request.setAttribute("userComments", userComments);
 				request.setAttribute("years", years);
@@ -104,7 +108,6 @@ public class HomeServlet extends HttpServlet{
 			request.setAttribute("beginDate", minDate);
 			request.setAttribute("endDate", maxDate);
 			List<UserMessage> userMessages = new MessageService().getMessage();
-			List<User> users = new UserService().getUser();
 			request.setAttribute("userMessages", userMessages);
 			request.setAttribute("users", users);
 			request.setAttribute("userComments", userComments);

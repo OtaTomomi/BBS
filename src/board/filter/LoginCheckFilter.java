@@ -12,6 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import board.beans.User;
 
@@ -32,12 +33,10 @@ public class LoginCheckFilter implements Filter{
 	private void redirectToLoginPage(ServletRequest request, ServletResponse response) {
 		List<String> messages = new ArrayList<String>();
 		messages.add("ログインからやり直してください");
-		request.setAttribute("errorMessages", messages);
+		 ((HttpServletRequest) request).getSession().setAttribute("errorMessages", messages);
 		try {
 
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-		} catch (ServletException e) {
-			e.printStackTrace();
+			((HttpServletResponse) response).sendRedirect("login");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

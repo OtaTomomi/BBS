@@ -74,8 +74,8 @@ public class PostingServlet extends HttpServlet{
 		if(StringUtils.isBlank(text) == true){
 			messages.add("本文を入力してください");
 		}
-		if(10000 < text.length()){
-			messages.add("本文は10000字以下で入力してください");
+		if(1000 < text.length()){
+			messages.add("本文は1000字以下で入力してください");
 		}
 		if(StringUtils.isBlank(category) == true){
 			messages.add("カテゴリーを入力してください");
