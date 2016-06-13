@@ -28,10 +28,10 @@
 
 <div class = "login">
 	<label for = "loginId"></label>
-	<input name = "loginId" value = "${ loginId }" id = "loginId"placeholder="ID(半角英数字)" size = "25"/><br />
+	<input name = "loginId" value = "${ loginId }" id = "loginId"placeholder="ID" size = "25"/><br />
 
 	<br /><label for = "password"></label>
-	<input name = "password" type = "password" id = "password" placeholder="パスワード(半角英数字記号)" size = "25"/><br />
+	<input name = "password" type = "password" id = "password" placeholder="パスワード" size = "25"/><br />
 	<c:remove var = "loginId" scope = "session" />
 
 	<br /><input type = "submit" value = "ログイン"style="width:192px;height:30px" class = "button" /><br />

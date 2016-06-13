@@ -96,6 +96,7 @@ td.comment{
 td.comment-post{
 	border-top:none;
 
+
 }
 .comment-area{
 	margin: 10px;
@@ -170,7 +171,7 @@ div.text{
 
 .commentText{
 	position: relative;
-    left: 300px;
+    left: 224px;
     margin-left:0px;
 }
 
@@ -179,13 +180,14 @@ div.text{
 	bottom:4px;
 }
 .comment-area{
-	margin-left:16px;
+	margin-left:10px;
 	padding: 8px 15px;
 }
 .postCommentButton{
 	text-align:right;
 }
 td.comment-post{
+	padding: 15px 15px;
 
 }
 

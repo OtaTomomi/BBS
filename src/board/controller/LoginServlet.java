@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet{
 			boolean useable = user.getUseable();
 			if(useable == false){
 				List<String> messages = new ArrayList<String>();
-				messages.add("このアカウントは停止されています。");
+				messages.add("このアカウントは停止されています");
 				session.setAttribute("loginId",loginId);
 				session.setAttribute("errorMessages", messages);
 				response.sendRedirect("login");

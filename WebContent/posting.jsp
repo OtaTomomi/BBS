@@ -16,7 +16,7 @@
 <a href = "home">ホーム画面</a>
 <a href = "logout">ログアウト</a>
 </div>
-<h3>新規投稿</h3>
+<h2>新規投稿</h2>
 </div>
 <c:if test = "${ not empty errorMessages }" >
 	<div class = "errorMessages">

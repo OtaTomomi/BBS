@@ -22,7 +22,7 @@
 
 <a href = "logout">ログアウト</a>
 </div>
-<h3>ホーム</h3>
+<h2>ホーム</h2>
 <c:if test = "${ not empty errorMessages }">
 	<div class = "errorMessages">
 		<ul>
@@ -41,7 +41,7 @@
 <table border = "0">
 <tr>
 <td class = "row-search">
-	カテゴリを指定して検索
+	カテゴリーを指定して検索
 </td>
 <td class = "row-right">
 	：&nbsp;<input type = "text" name = "category" size = "20" class = "categrysearch-box" value = "${category }">
@@ -265,7 +265,7 @@
 					<textarea name = "commentText" cols = "100" rows = "5" class = "comment-box" wrap = "hard"placeholder="500字以下で入力してください"></textarea>
 					<input type = "hidden" value ="${ userMessage.id }" name = messageId>
 				</div>
-				<div class = "postCommentButton"><input type = "submit" value = "コメント投稿"class = "button"></div>
+				<div class = "postCommentButton"><input type = "submit" value = "コメント投稿"class = "button"style="width:100px;height:30px"></div>
 
 			</form>
 			</td>
