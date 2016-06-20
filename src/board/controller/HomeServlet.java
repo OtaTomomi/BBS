@@ -77,6 +77,8 @@ public class HomeServlet extends HttpServlet{
 
 				List<UserMessage> userMessageMatchDateOnly = new MessageService().getMessageMatchDateOnly(beginYear, beginMonth, beginDay, endYear, endMonth, endDay);
 				System.out.println(userMessageMatchDateOnly.size());
+				request.setAttribute("defaultBeginDate", minDate);
+				request.setAttribute("defaultEndDate", maxDate);
 				request.setAttribute("userMessages", userMessageMatchDateOnly);
 				request.setAttribute("userComments", userComments);
 				request.setAttribute("years", years);
@@ -89,6 +91,8 @@ public class HomeServlet extends HttpServlet{
 
 			}else{
 				List<UserMessage> userMessageMatchDateAndCategories = new MessageService().getMessageMatchDateAndCategory(category,beginYear, beginMonth, beginDay, endYear, endMonth, endDay);
+				request.setAttribute("defaultBeginDate", minDate);
+				request.setAttribute("defaultEndDate", maxDate);
 				request.setAttribute("users", users);
 				request.setAttribute("userMessages", userMessageMatchDateAndCategories);
 				request.setAttribute("userComments", userComments);
@@ -105,6 +109,8 @@ public class HomeServlet extends HttpServlet{
 			request.setAttribute("years", years);
 			request.setAttribute("months", months);
 			request.setAttribute("days", days);
+			request.setAttribute("defaultBeginDate", minDate);
+			request.setAttribute("defaultEndDate", maxDate);
 			request.setAttribute("beginDate", minDate);
 			request.setAttribute("endDate", maxDate);
 			List<UserMessage> userMessages = new MessageService().getMessage();

@@ -260,6 +260,20 @@ td.row-search{
 .header {
 
 }
+.popWindow {
+  max-width: 300px;
+  position: absolute;
+  padding: 6px 15px;
+  background-color: #fff;
+  border: 5px double #ccc;
+  display: none;
+  color: #63f;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.5em;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #ccc;
+}
 
 
 

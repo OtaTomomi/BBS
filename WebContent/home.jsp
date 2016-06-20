@@ -37,7 +37,7 @@
 <br />
 <div class = "search">
 
-<form action = "home" method = "get">
+<form action = "home" method = "get"name = "search">
 <table border = "0">
 <tr>
 <td class = "row-search">
@@ -53,7 +53,7 @@
 </td>
 <td class = "row-right">
 	：&nbsp;<select name = "beginYear" >
-		<c:forEach begin = "${ beginDate.year }"  var = "year" end = "${endDate.year}">
+		<c:forEach begin = "${ defaultBeginDate.year }"  var = "year" end = "${defaultEndDate.year}">
 			<option value = "${ year }"
 				<c:if test = "${ year == beginDate.year }">
 				 selected
@@ -63,7 +63,7 @@
 		</c:forEach>
 	</select>年
 
-	<select name = "beginMonth" >
+	<select name = "beginMonth"onchange="beginDaySet()" >
 			<c:forEach items = "${ months }"  var = "month">
 				<option value = "${ month }"
 				<c:if test = "${ month == beginDate.month}">
@@ -87,7 +87,7 @@
 
 	～
 	<select name = "endYear" >
-			<c:forEach begin = "${ beginDate.year }"  var = "year" end = "${endDate.year}">
+			<c:forEach begin = "${ defaultBeginDate.year }"  var = "year" end = "${defaultEndDate.year}">
 				<option value = "${ year }"<c:if test = "${ year == endDate.year }">
 				 selected
 				</c:if>>
@@ -96,7 +96,7 @@
 			</c:forEach>
 	</select>年
 
-	<select name = "endMonth" >
+	<select name = "endMonth"onchange="daySet()" >
 			<c:forEach items = "${ months }"  var = "month">
 				<option value = "${ month }"
 				<c:if test = "${month == endDate.month}">
@@ -156,9 +156,13 @@
 			<pre><font size = +1 ><c:out value = "${ userMessage.text }" /></font></pre></div>
 			<div class = "postInfo">
 				<font size = -1>投稿者：</font><span class = "user"><c:out value = "${ userMessage.userName }" /></span>
-				<font size = -1>投稿日時：</font><span class = "insert"><fmt:formatDate value = "${ userMessage.insertDate }"
+				<font size = -1>投稿日時：</font><span class = "insert"id = "${userMessage.id }"><fmt:formatDate value = "${ userMessage.insertDate }"
 				pattern = "yyyy/MM/dd HH:mm:ss"/></span>
 				<font size = -1>カテゴリー：</font><span class = "category"><c:out value = "${ userMessage.category }" /></span>
+
+
+
+
 
 			</div>
 				<span class = "deleteButton">
@@ -210,10 +214,70 @@
 							<c:out value = "${ userComment.commentName }" />
 						</span>
 						&nbsp;
-						<span class = commentInsertDate>
+						<span class = commentInsertDate id = "${userComment.commentId }">
 							<fmt:formatDate value = "${ userComment.commentInsertDate }"
 							pattern = "yyyy/MM/dd HH:mm:ss"/>
 						</span>
+
+						<script src = "http://code.jquery.com/jquery-3.0.0.min.js"></script>
+	<script>
+
+	$(function(){
+    	$("span.commentInsertDate#${ userComment.commentId }").mouseover(function(){
+    		var insertDate = Date.parse("${ userComment.commentInsertDate }") / 1000;
+   			today = Math.ceil(new Date()/1000);
+   			relativeTime = today - insertDate ;
+   		var marginTop = 0;
+	     	var marginLeft = 0;
+	     	var speed = 300;
+	     	var pop;
+	     	pop = $("<p/>").addClass("popWindow").appendTo($("body"));
+			if(relativeTime < 5){
+   			var msg = "たった今";
+   		}
+   		if(5 <= relativeTime &&relativeTime < 60){
+   			var msg = "約" + relativeTime + "秒前";
+   		}
+   		if(60 <= relativeTime && relativeTime < 3600){
+   			var minits = Math.round(relativeTime / 60);
+   			var msg = "約" + minits + "分前";
+   		}
+   		if(3600 <= relativeTime && relativeTime < 86400){
+   			var hour = Math.round(relativeTime / 3600);
+   			var msg = "約" + hour + "時間前";
+   		}
+   		if(86400 <= relativeTime && relativeTime < 604800){
+   			var day = Math.round(relativeTime / 86400);
+   			var msg = "約" + day + "日前";
+   		}
+   		if(604800<= relativeTime && relativeTime < 2419200){
+   			var week = Math.round(relativeTime / 604800);
+   			var msg = "約" + week + "週前";
+   		}
+   		if(2419200 <= relativeTime && relativeTime < 29030400){
+   			var month = Math.round(relativeTime / 2419200);
+   			var msg = "約" + month + "月前";
+   		}
+   		if(29030400 <= relativeTime){
+   			var year = Math.round(relativeTime / 29030400);
+   			var msg = "約" + year + "年前";
+   		}
+   		pop.text(msg);
+    		var offsetTop = $(this).offset().top + marginTop;
+    		var offsetLeft = $(this).offset().left + marginLeft;
+    		pop.css({
+    		      "top": offsetTop,
+    		      "left": offsetLeft
+    		    }).show(speed);
+    	}).mouseout(function(){
+    		 $(".popWindow").text("").hide("fast");
+    	});
+	});
+				</script>
+
+
+
+
 						<%--</font> --%>
 						</div>
 						<div class = "commentDeleteButton">
@@ -276,8 +340,8 @@
 	</table>
 	<br />
 	</div>
-</c:forEach>
-<br/>
+
+
 
 
 
@@ -285,6 +349,64 @@
 検索に一致する投稿はありません
 </c:if>
 
+<script src = "http://code.jquery.com/jquery-3.0.0.min.js"></script>
+	<script>
+
+	     $(function(){
+	     	$("span.insert#${ userMessage.id }").mouseover(function(){
+	     		var insertDate = Date.parse("${ userMessage.insertDate }") / 1000;
+	    			today = Math.ceil(new Date()/1000);
+	    			relativeTime = today - insertDate ;
+	    		var marginTop = 0;
+		     	var marginLeft = 0;
+		     	var speed = 300;
+		     	var pop;
+		     	pop = $("<p/>").addClass("popWindow").appendTo($("body"));
+    			if(relativeTime < 5){
+	    			var msg = "たった今";
+	    		}
+	    		if(5 <= relativeTime &&relativeTime < 60){
+	    			var msg = "約" + relativeTime + "秒前";
+	    		}
+	    		if(60 <= relativeTime && relativeTime < 3600){
+	    			var minits = Math.round(relativeTime / 60);
+	    			var msg = "約" + minits + "分前";
+	    		}
+	    		if(3600 <= relativeTime && relativeTime < 86400){
+	    			var hour = Math.round(relativeTime / 3600);
+	    			var msg = "約" + hour + "時間前";
+	    		}
+	    		if(86400 <= relativeTime && relativeTime < 604800){
+	    			var day = Math.round(relativeTime / 86400);
+	    			var msg = "約" + day + "日前";
+	    		}
+	    		if(604800<= relativeTime && relativeTime < 2419200){
+	    			var week = Math.round(relativeTime / 604800);
+	    			var msg = "約" + week + "週前";
+	    		}
+	    		if(2419200 <= relativeTime && relativeTime < 29030400){
+	    			var month = Math.round(relativeTime / 2419200);
+	    			var msg = "約" + month + "月前";
+	    		}
+	    		if(29030400 <= relativeTime){
+	    			var year = Math.round(relativeTime / 29030400);
+	    			var msg = "約" + year + "年前";
+	    		}
+	    		pop.text(msg);
+	     		var offsetTop = $(this).offset().top + marginTop;
+	     		var offsetLeft = $(this).offset().left + marginLeft;
+	     		pop.css({
+	     		      "top": offsetTop,
+	     		      "left": offsetLeft
+	     		    }).show(speed);
+	     	}).mouseout(function(){
+	     		 $(".popWindow").text("").hide("fast");
+	     	});
+	     });
+	</script>
+
+	</c:forEach>
+<br/>
 
 
 </body>
