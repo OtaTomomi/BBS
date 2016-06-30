@@ -156,8 +156,9 @@
 			<pre><font size = +1 ><c:out value = "${ userMessage.text }" /></font></pre></div>
 			<div class = "postInfo">
 				<font size = -1>投稿者：</font><span class = "user"><c:out value = "${ userMessage.userName }" /></span>
-				<font size = -1>投稿日時：</font><span class = "insert"id = "${userMessage.id }"><fmt:formatDate value = "${ userMessage.insertDate }"
-				pattern = "yyyy/MM/dd HH:mm:ss"/></span>
+				<font size = -1>投稿日時：</font><span class = "insert"id = "${userMessage.id }">
+				<fmt:formatDate value = "${ userMessage.insertDate }" pattern = "yyyy/MM/dd HH:mm:ss"/>
+					</span>
 				<font size = -1>カテゴリー：</font><span class = "category"><c:out value = "${ userMessage.category }" /></span>
 
 
